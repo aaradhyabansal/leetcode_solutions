@@ -62,3 +62,50 @@ int coinChangeRec(vector<int>& coins,int amt,int index)
     }
 };
 
+//MEMOISATION solution less optimised but works
+
+class Solution {
+public:
+
+int coinChangeRec(vector<int>& coins,int amt,int index)
+{
+    if(index==0)
+    {
+        return (amt%coins[0] ==0);
+    }
+
+    int notTake=coinChangeRec(coins,amt,index-1);
+    int take=0;
+    if(coins[index]<=amt)
+    take=coinChangeRec(coins,amt-coins[index],index);
+
+    return take+notTake;
+
+}
+int coinChangeMemoi(vector<int>& coins,int amt,int index,vector<vector<int>>&dp)
+{
+    if(index==0)
+    {
+        return (amt%coins[0] ==0);
+    }
+    if(dp[index][amt]!=-1)
+    return dp[index][amt];
+
+    
+    int take=0;
+    if(coins[index]<=amt)
+    take=coinChangeMemoi(coins,amt-coins[index],index,dp);
+
+int notTake=coinChangeMemoi(coins,amt,index-1,dp);
+    return dp[index][amt]=take+notTake;
+
+}
+
+
+    int change(int amount, vector<int>& coins) {
+        int amt=amount;
+        vector<vector<int>>dp(coins.size(),vector<int>(amt+1,-1));
+       // return coinChangeRec(coins,amt,coins.size()-1);
+        return coinChangeMemoi(coins,amt,coins.size()-1,dp);
+    }
+};
