@@ -42,8 +42,26 @@ int climbStairsRec(int n)
 
    return o+t;
 }
-    int climbStairs(int n) {
+//memoisation solution
+int climbStairsMemo(int n,vector<int>&dp)
+{
+   if(n==0)
+   return 1;
 
-       return climbStairsRec(n);
+   if(n==1)
+   return 1;
+
+if(dp[n]!=-1)
+return dp[n];
+
+   int o=climbStairsMemo(n-1,dp);
+   int t=climbStairsMemo(n-2,dp);
+
+   return dp[n]=o+t;
+}
+    int climbStairs(int n) {
+      vector<int>dp(n+1,-1);
+    //    return climbStairsRec(n);
+    return climbStairsMemo(n,dp);
     }
 };
