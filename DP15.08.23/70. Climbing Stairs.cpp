@@ -59,9 +59,27 @@ return dp[n];
 
    return dp[n]=o+t;
 }
+//tabulation solution
+int climbStairsTab(int n)
+{
+    vector<int>dp(n+1,0);
+    dp[0]=1;
+    dp[1]=1;
+
+    for(int i=2;i<=n;i++)
+    {
+   int o=dp[i-1];
+   int t=dp[i-2];
+
+    dp[i]=o+t;
+    }
+    return dp[n];
+}
+
     int climbStairs(int n) {
       vector<int>dp(n+1,-1);
     //    return climbStairsRec(n);
-    return climbStairsMemo(n,dp);
+    //return climbStairsMemo(n,dp);
+    return climbStairsTab(n);
     }
 };
