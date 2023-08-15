@@ -76,10 +76,30 @@ int climbStairsTab(int n)
     return dp[n];
 }
 
-    int climbStairs(int n) {
+int climbStairsTabSO(int n)
+{
+    vector<int>dp(n+1,0);
+    int prev1=1,prev2=1,curr=0;
+  
+   for(int i=2;i<=n;i++)
+    {
+   int o=prev1;
+   int t=prev2;
+
+    curr=prev1+prev2;
+    prev2=prev1;
+    prev1=curr;
+
+
+    }
+    return curr;
+}
+
+int climbStairs(int n) {
       vector<int>dp(n+1,-1);
     //    return climbStairsRec(n);
     //return climbStairsMemo(n,dp);
     return climbStairsTab(n);
+    return climbStairsTabSO(n);
     }
 };
