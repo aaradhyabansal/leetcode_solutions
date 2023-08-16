@@ -32,6 +32,7 @@ public:
     int findPeakElement(vector<int>& nums) {
     
         int n=nums.size();
+        //pehle base case handle
         if(n==1)
         return 0;
 
@@ -51,11 +52,13 @@ public:
                return mid;
            }
            if(nums[mid]>=nums[mid-1]&& nums[mid]<=nums[mid+1])
-           {
+           { 
+               //ascending hill wala case
                low=mid+1;
            }
            else if(nums[mid]<=nums[mid-1]&& nums[mid]>=nums[mid+1])
            {
+               //descending hill wala case
                high=mid-1;
            }
            else//valley wala case
