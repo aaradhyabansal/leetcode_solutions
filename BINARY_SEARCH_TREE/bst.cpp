@@ -221,6 +221,20 @@ void convertBSTtoSortedDLL(Node* root,Node* head)
 //left Subtree ko ll mai convert
 	convertBSTtoSortedDLL(root->left,head);
 }
+
+Node* convertSortedDLLtoBST(Node* head,int n)
+{
+	if(n<=0 ||head==NULL)
+	return NULL;
+
+	Node* leftSubTree=convertSortedDLLtoBST(head,(n/2)-1);
+	Node* root=head;
+	root->left=leftSubTree;
+	head=head->right;//idhar galti hogi
+	root->right=convertSortedDLLtoBST(head,(n-1)-n/2);
+	return root;
+}
+
 void printLinkedList(Node* head) {
 	Node* temp = head;
     cout << endl;
@@ -232,16 +246,26 @@ void printLinkedList(Node* head) {
 }
 
 int main() {
-	  int inorder[] = {1,2,3,4,5,6,7,8,9};
+	  	int inorder[] = {1,2,3,4,5,6,7,8,9};
 	int s = 0;
 	int e = 8;
 
 	Node* root = bstUsingInorder(inorder, s,e);
 	levelOrderTraversal(root);
 
-	cout << "printing sorted linked list:" << endl;
-	Node* head = NULL;
-	convertBSTtoSortedDLL(root, head);
-	printLinkedList(head);
+	// cout << "printing sorted linked list:" << endl;
+	// Node* head = NULL;
+	// convertIntoSortedDLL(root, head);
+	// printLinkedList(head);
+
+	Node* root1 = NULL;
+	root1 =	sortedLinkedListIntoBST(head, 9);
+	cout << "Doping level order traversal for root 1" << endl;
+	levelOrderTraversal(root1);
+
+	
+	  // Node* root = NULL;
+	  // cout << "Enter the data for Node " << endl;
+	  // takeInput(root);
   return 0;
 }
