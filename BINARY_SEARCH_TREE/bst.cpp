@@ -186,31 +186,62 @@ Node* deleteNodeInBST(Node* root, int target){
   }
   return root;
 }
+Node* bstUsingInorder(int inorder[], int s, int e) {
+	//base case
+	if(s > e) {
+		return NULL;
+	}
 
+	int mid = (s+e)/2;
+	int element = inorder[mid];
+	Node* root = new Node(element);
+
+	root->left = bstUsingInorder(inorder, s, mid-1);
+	root->right = bstUsingInorder(inorder, mid+1, e);
+
+	return root;
+	
+}
+
+
+void convertBSTtoSortedDLL(Node* root,Node* head)
+{
+	if(root==NULL)
+	return;
+
+	//right Subtree ko ll mai convert
+	convertBSTtoSortedDLL(root->right,head);
+	root->right=head;
+
+	if(head!=NULL)
+	head->left=root;
+
+	head=root;
+
+//left Subtree ko ll mai convert
+	convertBSTtoSortedDLL(root->left,head);
+}
+void printLinkedList(Node* head) {
+	Node* temp = head;
+    cout << endl;
+	while(temp != NULL ) {
+		cout << temp -> data << " ";
+		temp = temp -> right;
+	}
+	cout << endl;
+}
 
 int main() {
-	  Node* root = NULL;
-	  cout << "Enter the data for Node " << endl;
-	  takeInput(root);
-	  cout << "Printing the tree" << endl;
-	  levelOrderTraversal(root);
-	  cout << endl;
-	//   cout << "Printing Inorder: " << endl;
-	//   inOrderTraversal(root);
-	//   cout << endl;
-	//   cout << "Printing Preorder: " << endl;
-	//   preOrderTraversal(root);
-	//   cout << endl;
-	//   cout << "Printing Postorder: " << endl;
-	//   postOrderTraversal(root);
+	  int inorder[] = {1,2,3,4,5,6,7,8,9};
+	int s = 0;
+	int e = 8;
 
-	// bool ans  = findNodeInBST(root,155);
-	// cout << "present or not : " << ans << endl;
-	// cout << endl <<" Minimum value: " << minVal(root) << endl;
-	// cout << endl << "Maximum value: " << maxVal(root) << endl;
-
-	root = deleteNodeInBST(root, 100);
+	Node* root = bstUsingInorder(inorder, s,e);
 	levelOrderTraversal(root);
-	
+
+	cout << "printing sorted linked list:" << endl;
+	Node* head = NULL;
+	convertBSTtoSortedDLL(root, head);
+	printLinkedList(head);
   return 0;
 }
