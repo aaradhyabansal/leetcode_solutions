@@ -53,23 +53,32 @@ public:
     //    }
     //    return mp2[j];
     //sol2
-    sort(s.begin(),s.end());
+    // sort(s.begin(),s.end());
+    // sort(t.begin(),t.end());
+    // int i=0,j=0;
+    //    while(i<s.length())
+    //    {
+    //        if(s[i]==t[j])
+    //        {
+    //            i++;
+    //            j++;
+    //            continue;
+    //        }
+    //        else
+    //        {
+    //            return t[j];
+    //        }
+    //    }
+    //    return t[j];
+    //sol3
+     sort(s.begin(),s.end());
     sort(t.begin(),t.end());
-    int i=0,j=0;
-       while(i<s.length())
-       {
-           if(s[i]==t[j])
-           {
-               i++;
-               j++;
-               continue;
-           }
-           else
-           {
-               return t[j];
-           }
-       }
-       return t[j];
+    for(int i=0;i<s.length();i++)
+    {
+        if(s[i]!=t[i])
+        return t[i];
+    }
+    return t[s.length()];
 
 
     }
