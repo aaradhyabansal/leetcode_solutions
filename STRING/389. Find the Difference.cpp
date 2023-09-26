@@ -25,22 +25,40 @@ s and t consist of lowercase English letters.*/
 class Solution {
 public:
     char findTheDifference(string s, string t) {
-       vector<char>mp1;
-       vector<char>mp2;
-       for(int i=0;i<s.length();i++)
-       {
-           mp1.push_back(s[i]);
-       }
-       for(int i=0;i<t.length();i++)
-       {
-           mp2.push_back(t[i]);
-       }
-       sort(mp1.begin(),mp1.end());
-       sort(mp2.begin(),mp2.end());
-       int i=0,j=0;
+    //    vector<char>mp1;
+    //    vector<char>mp2;
+    //    for(int i=0;i<s.length();i++)
+    //    {
+    //        mp1.push_back(s[i]);
+    //    }
+    //    for(int i=0;i<t.length();i++)
+    //    {
+    //        mp2.push_back(t[i]);
+    //    }
+    //    sort(mp1.begin(),mp1.end());
+    //    sort(mp2.begin(),mp2.end());
+    //    int i=0,j=0;
+    //    while(i<s.length())
+    //    {
+    //        if(mp1[i]==mp2[j])
+    //        {
+    //            i++;
+    //            j++;
+    //            continue;
+    //        }
+    //        else
+    //        {
+    //            return mp2[j];
+    //        }
+    //    }
+    //    return mp2[j];
+    //sol2
+    sort(s.begin(),s.end());
+    sort(t.begin(),t.end());
+    int i=0,j=0;
        while(i<s.length())
        {
-           if(mp1[i]==mp2[j])
+           if(s[i]==t[j])
            {
                i++;
                j++;
@@ -48,10 +66,10 @@ public:
            }
            else
            {
-               return mp2[j];
+               return t[j];
            }
        }
-       return mp2[j];
+       return t[j];
 
 
     }
