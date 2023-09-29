@@ -23,6 +23,7 @@ Constraints:
 
 1 <= nums.length <= 105
 -105 <= nums[i] <= 105*/
+//sol1
 class Solution {
 public:
     bool isMonotonic(vector<int>& nums) {
@@ -46,6 +47,33 @@ public:
 
         else
         return 0;
+        
+    }
+};
+
+//sol2
+class Solution {
+public:
+    bool isMonotonic(vector<int>& nums) {
+        if(nums.size()==1)
+        return 1;
+        int inc=0,dec=0,n=nums.size();
+        for(int i=0;i<n-1;i++)
+        {
+            if(nums[i]>nums[i+1])
+            {
+                inc=1;
+            }
+           else if(nums[i]<nums[i+1])
+            {
+                dec=1;
+            }
+
+            if(inc&&dec)
+            return 0;
+        }
+        
+       return 1;
         
     }
 };
