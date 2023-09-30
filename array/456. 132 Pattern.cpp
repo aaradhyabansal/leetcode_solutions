@@ -45,3 +45,9 @@ public:
     }
 };
 
+//sol2 brute force algorithm
+
+use 3 nested loops and find the pattern exists or mot 
+but but but 
+T.C.->(O(n^3))
+
