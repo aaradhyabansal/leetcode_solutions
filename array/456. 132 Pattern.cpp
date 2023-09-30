@@ -51,3 +51,31 @@ use 3 nested loops and find the pattern exists or mot
 but but but 
 T.C.->(O(n^3))
 
+//sol using stack pattern matching bracket jaisa 
+
+class Solution {
+public:
+    bool find132pattern(vector<int>& nums) {
+        int n=nums.size();
+        stack<int>st;
+        vector<int>minA(n,0);
+        minA[0]=nums[0];
+        for(int i=1;i<n;i++)
+        {
+            minA[i]=min(minA[i-1],nums[i]);
+        }
+
+        for(int i=n-1;i>=0;i--)
+        {
+            while(!st.empty() && st.top()<=minA[i])
+            st.pop();
+
+            if(!st.empty()&& st.top()<nums[i])
+            return true;
+
+            st.push(nums[i]);
+        }
+        return false;
+        
+    }
+};
