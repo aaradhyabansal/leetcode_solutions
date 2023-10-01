@@ -50,3 +50,37 @@ public:
         return s;
     }
 };
+
+//sol2 suing stack
+class Solution {
+public:
+    string reverseWords(string s) {
+        stack<char>st;
+        string str;
+        for(int i=0;i<s.length();i++)
+        {
+            if(s[i]!=' ')
+            {
+                st.push(s[i]);
+            }
+            else
+            {
+                while(!st.empty())
+                {
+                str+=st.top();
+                st.pop();
+                }
+                str+=' ';
+            
+            }
+        }
+        //ek aur baar krna hoga coz last word not reverses
+        //idhar galti hogi
+        while(!st.empty())
+                {
+                str+=st.top();
+                st.pop();
+                }
+        return str;
+    }
+};
