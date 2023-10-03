@@ -23,21 +23,34 @@ Constraints:
 
 1 <= nums.length <= 100
 1 <= nums[i] <= 100*/
-//sol1
 class Solution {
 public:
     int numIdenticalPairs(vector<int>& nums) {
-        int cnt=0,n=nums.size();
-        for(int i=0;i<n;i++)
+        //sol1 brute force
+        // int cnt=0,n=nums.size();
+        // for(int i=0;i<n;i++)
+        // {
+        //     for(int j=i+1;j<n;j++)
+        //     {
+        //         if(nums[i]==nums[j])
+        //         cnt++;
+        //     }
+        // }
+        // return cnt;
+
+        //sol2
+        unordered_set<int>st;
+        unordered_map<int,int>mp;
+        int ans=0;
+        for(int i=0;i<nums.size();i++)
         {
-            for(int j=i+1;j<n;j++)
-            {
-                if(nums[i]==nums[j])
-                cnt++;
-            }
+            st.insert(nums[i]);
+            mp[nums[i]]++;
         }
-        return cnt;
+        for(auto i:st)
+        {
+            ans+=((mp[i]*(mp[i]-1))/2);
+        }
+    return ans;
     }
 };
-
-TC-O(n2)
