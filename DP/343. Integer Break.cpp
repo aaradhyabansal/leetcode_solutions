@@ -22,23 +22,43 @@ Constraints:
 class Solution {
 public:
 
-int intBreakRec(int n)
+// int intBreakRec(int n)
+// {
+//     if(n==0)
+//     return 0;
+//     if(n==1||n==2)
+//     return 1;
+
+//     int ans=0;
+//     for(int i=1;i<=n/2;i++)
+//     {
+//        ans=max(ans,max(i,intBreakRec(i))*max(n-i,intBreakRec(n-i)));
+//     }
+//     return ans;
+
+// }
+int intBreakMemoi(int n,vector<int>&dp)
 {
     if(n==0)
     return 0;
     if(n==1||n==2)
     return 1;
 
+if(dp[n]!=-1)
+return dp[n];
     int ans=0;
     for(int i=1;i<=n/2;i++)
     {
-       ans=max(ans,max(i,intBreakRec(i))*max(n-i,intBreakRec(n-i)));
+       ans=max(ans,max(i,intBreakMemoi(i,dp))*max(n-i,intBreakMemoi(n-i,dp)));
     }
-    return ans;
+    return dp[n]=ans;
 
 }
 
     int integerBreak(int n) {
-        return intBreakRec(n);
+
+        vector<int>dp(n+1,-1);
+        // return intBreakRec(n);
+        return intBreakMemoi(n,dp);
     }
 };
