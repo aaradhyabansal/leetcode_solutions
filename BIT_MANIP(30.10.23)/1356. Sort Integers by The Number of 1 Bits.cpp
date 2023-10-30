@@ -63,3 +63,39 @@ public:
 
     }
 };
+
+//sol-2
+
+class Solution {
+public:
+
+int findOneBits(int num)
+    {
+        int cnt=0;
+        while(num!=0)
+        {
+            cnt+=(num&1);
+            num>>=1;
+        }
+        return cnt;
+    }
+
+    vector<int> sortByBits(vector<int>& arr) {
+        
+
+        auto comp=[&](int&a,int&b){
+            int cnt_a=findOneBits(a);
+        int cnt_b=findOneBits(b);
+
+        if(cnt_a==cnt_b)
+        return a<b;
+
+        return cnt_a<cnt_b;
+
+        };
+
+        sort(arr.begin(),arr.end(),comp);
+        return arr;
+
+    }
+};
